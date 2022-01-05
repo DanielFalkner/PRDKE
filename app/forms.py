@@ -1,6 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField, SelectField, \
+    FieldList
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
+from wtforms_sqlalchemy.fields import QuerySelectField
+
 from app.models import User, Railwagon, Personwagon
 
 
@@ -29,6 +32,21 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+
+def rw_query():
+    return Railwagon.query
+
+
+def pw_query():
+    return Personwagon.query
+
+
+class TrainForm(FlaskForm):
+    id = IntegerField('ID', validators=[DataRequired()])
+    railwagon = QuerySelectField('Railwagon', query_factory=rw_query, allow_blank=True, get_label='id', validators=[DataRequired()])
+    personwagons = QuerySelectField('Personwagons', query_factory=rw_query, allow_blank=True, get_label='id', validators=[DataRequired()])
+    submit = SubmitField('Add Train')
 
 
 class RailwagonForm(FlaskForm):

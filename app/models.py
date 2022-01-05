@@ -13,7 +13,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-#    role = db.Column(db.Boolean)
+    #    role = db.Column(db.Boolean)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
 
     def __repr__(self):
@@ -38,8 +38,8 @@ class Post(db.Model):
 
 class Train(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    railwagon = relationship("Railwagon", back_populates="trains")
-    personwagons = relationship("Personwagon", backref='train', lazy='dynamic')
+    railwagon_id = db.Column(db.Integer, db.ForeignKey('railwagon.id'))
+    personwagons = db.relationship('Personwagon', backref='train', lazy='dynamic')
 
     def __repr__(self):
         return '<Train {}>'.format(self.id)
@@ -49,7 +49,7 @@ class Railwagon(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     max_traction = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
-    train_id = db.Column(db.Integer, db.ForeignKey('train.id'))
+    train_rw = db.relationship('Train', backref='railwagon', uselist=False)
 
     def __repr__(self):
         return '<Railwagon {}>'.format(self.id)
@@ -60,11 +60,10 @@ class Personwagon(db.Model):
     seats = db.Column(db.Integer, nullable=False)
     max_weight = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
-    train_id = db.Column(db.Integer, db.ForeignKey('train.id'))
+    train_id_pw = db.Column(db.Integer, db.ForeignKey('train.id'))
 
     def __repr__(self):
         return '<Personwagon {}>'.format(self.id)
-
 
 
 @login.user_loader

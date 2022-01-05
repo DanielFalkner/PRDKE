@@ -41,4 +41,24 @@
     <a href="{{ url_for('personwagon') }}">
        <button>Add Personwagon</button>
     </a>
+
+    <table>
+        <tr>
+            <th>Train</th>
+            <th>Actions</th>
+        </tr>
+        {% for train in trains %}
+        <tr>
+            <td>{{ train.id }}</td>
+            <td>
+                <a href="/deletePw/{{train.id}}">Delete</a>
+                <br>
+                <a href="/updatePw/{{train.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('train') }}">
+       <button>Add Train</button>
+    </a>
 {% endblock %}

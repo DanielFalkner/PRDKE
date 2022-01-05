@@ -1,9 +1,9 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, RailwagonForm, RailwagonUpdateForm, PersonwagonForm, \
-    PersonwagonUpdateForm
+    PersonwagonUpdateForm, TrainForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Railwagon, Personwagon
+from app.models import User, Railwagon, Personwagon, Train
 from werkzeug.urls import url_parse
 
 
@@ -13,7 +13,8 @@ from werkzeug.urls import url_parse
 def index():
     railwagons = Railwagon.query.all()
     personwagons = Personwagon.query.all()
-    return render_template('index.html', title='Home', railwagons=railwagons, personwagons=personwagons)
+    trains = Train.query.all()
+    return render_template('index.html', title='Home', railwagons=railwagons, personwagons=personwagons, trains=trains)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -77,6 +78,17 @@ def user(username):
         {'author': user, 'body': 'Test post #2'}
     ]
     return render_template('user.html', user=user, posts=posts)
+
+
+@app.route('/train', methods=['GET', 'POST'])
+def train():
+    form = TrainForm()
+    if form.validate_on_submit():
+        train = Train(id=form.id.data, railwagon_id=form.railwagon.data)
+        db.session.add(train)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('train.html', title='Train', form=form)
 
 
 @app.route('/railwagon', methods=['GET', 'POST'])

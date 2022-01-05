@@ -1,10 +1,8 @@
-2021-12-27 16:19:33,167 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+2022-01-05 13:28:33,312 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
-    self.dialect.do_execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such column: user.role
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2028, in get_property
+    return self._props[key]
+KeyError: 'trains'
 
 The above exception was the direct cause of the following exception:
 
@@ -23,45 +21,36 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/daniel/dke/app/routes.py", line 25, in login
     user = User.query.filter_by(username=form.username.data).first()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2810, in first
-    return self.limit(1)._iter().first()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2894, in _iter
-    result = self.session.execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
-    result = conn._execute_20(statement, params or {}, execution_options)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
-    ret = self._execute_context(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
-    self._handle_dbapi_exception(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_sqlalchemy/__init__.py", line 550, in __get__
+    mapper = orm.class_mapper(type)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 442, in class_mapper
+    mapper = _inspect_mapped_class(class_, configure=configure)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 421, in _inspect_mapped_class
+    mapper._check_configure()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1916, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3429, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3468, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1933, in _post_configure_properties
+    prop.init()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/interfaces.py", line 231, in init
+    self.do_init()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2155, in do_init
+    self._generate_backref()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2491, in _generate_backref
+    self._add_reverse_property(self.back_populates)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2061, in _add_reverse_property
+    other = self.mapper.get_property(key, _configure_mappers=False)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2030, in get_property
     util.raise_(
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
     raise exception
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
-    self.dialect.do_execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.role
-[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.role AS user_role 
-FROM user 
-WHERE user.username = ?
- LIMIT ? OFFSET ?]
-[parameters: ('Daniel', 1, 0)]
-(Background on this error at: https://sqlalche.me/e/14/e3q8)
-2021-12-27 16:20:13,254 ERROR: Exception on /register [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
-    self.dialect.do_execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such column: user.role
-
-The above exception was the direct cause of the following exception:
-
+sqlalchemy.exc.InvalidRequestError: Mapper 'mapped class Railwagon->railwagon' has no property 'trains'
+2022-01-05 13:30:49,927 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 13:30:53,900 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 13:30:56,774 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -75,48 +64,48 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 48, in register
-    if form.validate_on_submit():
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
-    return self.is_submitted() and self.validate()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 329, in validate
-    return super().validate(extra)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 146, in validate
-    if not field.validate(self, extra):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 242, in validate
-    stop_validation = self._run_validation_chain(form, chain)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
-    validator(form, self)
-  File "/home/daniel/dke/app/forms.py", line 24, in validate_username
-    user = User.query.filter_by(username=username.data).first()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2810, in first
-    return self.limit(1)._iter().first()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2894, in _iter
-    result = self.session.execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
-    result = conn._execute_20(statement, params or {}, execution_options)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
-    ret = self._execute_context(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
-    self._handle_dbapi_exception(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
-    util.raise_(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
-    self.dialect.do_execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.role
-[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.role AS user_role 
-FROM user 
-WHERE user.username = ?
- LIMIT ? OFFSET ?]
-[parameters: ('user12345', 1, 0)]
-(Background on this error at: https://sqlalche.me/e/14/e3q8)
-2021-12-27 16:21:38,449 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-04 15:54:14,496 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+  File "/home/daniel/dke/app/routes.py", line 25, in login
+    user = User.query.filter_by(username=form.username.data).first()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_sqlalchemy/__init__.py", line 550, in __get__
+    mapper = orm.class_mapper(type)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 442, in class_mapper
+    mapper = _inspect_mapped_class(class_, configure=configure)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 421, in _inspect_mapped_class
+    mapper._check_configure()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1916, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3429, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3468, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1933, in _post_configure_properties
+    prop.init()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/interfaces.py", line 231, in init
+    self.do_init()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2155, in do_init
+    self._generate_backref()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2491, in _generate_backref
+    self._add_reverse_property(self.back_populates)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2063, in _add_reverse_property
+    raise sa_exc.InvalidRequestError(
+sqlalchemy.exc.InvalidRequestError: back_populates on relationship 'Train.railwagon' refers to attribute 'Railwagon.train_id_rw' that is not a relationship.  The back_populates parameter should refer to the name of a relationship on the target class.
+2022-01-05 13:41:29,325 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 13:41:52,377 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 13:45:20,155 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:29:02,371 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:29:39,167 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:29:46,068 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:32:44,772 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:32:49,904 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:33:06,866 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:34:56,453 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:35:19,671 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:36:51,458 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:38:07,835 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:43:09,863 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:45:09,496 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:47:26,441 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:48:00,695 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:48:07,377 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:49:09,440 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 15:58:51,476 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]

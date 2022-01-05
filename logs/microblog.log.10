@@ -1,4 +1,13 @@
-2021-12-16 20:13:51,460 ERROR: Exception on /update/1 [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+2021-12-27 13:02:50,906 ERROR: Exception on /register [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: user.role
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,19 +21,61 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 95, in update
+  File "/home/daniel/dke/app/routes.py", line 48, in register
     if form.validate_on_submit():
-UnboundLocalError: local variable 'form' referenced before assignment
-2021-12-16 20:15:28,641 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2021-12-17 08:19:18,908 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2021-12-22 12:21:30,073 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2021-12-22 12:22:14,233 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2021-12-22 12:56:52,904 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2021-12-22 12:57:05,942 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2021-12-22 12:57:20,006 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2021-12-22 12:58:04,520 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2021-12-22 13:00:23,107 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2021-12-22 13:00:33,190 ERROR: Exception on /updatePw/1 [GET] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 329, in validate
+    return super().validate(extra)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 146, in validate
+    if not field.validate(self, extra):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 242, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
+    validator(form, self)
+  File "/home/daniel/dke/app/forms.py", line 24, in validate_username
+    user = User.query.filter_by(username=username.data).first()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2810, in first
+    return self.limit(1)._iter().first()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2894, in _iter
+    result = self.session.execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.role
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.role AS user_role 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('feh1', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2021-12-27 13:16:34,292 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 13:16:39,655 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 13:17:00,452 ERROR: Exception on /register [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: user.role
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -38,61 +89,52 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 143, in update_pw
-    return render_template('updateRw.html', form=form, pw=pw)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
-    return _render(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
-    rv = template.render(context)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 1090, in render
-    self.environment.handle_exception()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
-    reraise(*rewrite_traceback_stack(source=source))
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
-    raise value.with_traceback(tb)
-  File "/home/daniel/dke/app/templates/updateRw.html", line 1, in top-level template code
-    {% extends 'base.html' %}
-  File "/home/daniel/dke/app/templates/base.html", line 36, in top-level template code
-    {% block content %}{% endblock %}
-  File "/home/daniel/dke/app/templates/updateRw.html", line 15, in block "content"
-    {{ form.max_traction.label }}<br>
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 471, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'app.forms.PersonwagonUpdateForm object' has no attribute 'max_traction'
-2021-12-22 13:00:36,747 ERROR: Exception on /updatePw/1 [GET] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 143, in update_pw
-    return render_template('updateRw.html', form=form, pw=pw)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
-    return _render(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
-    rv = template.render(context)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 1090, in render
-    self.environment.handle_exception()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
-    reraise(*rewrite_traceback_stack(source=source))
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
-    raise value.with_traceback(tb)
-  File "/home/daniel/dke/app/templates/updateRw.html", line 1, in top-level template code
-    {% extends 'base.html' %}
-  File "/home/daniel/dke/app/templates/base.html", line 36, in top-level template code
-    {% block content %}{% endblock %}
-  File "/home/daniel/dke/app/templates/updateRw.html", line 15, in block "content"
-    {{ form.max_traction.label }}<br>
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 471, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'app.forms.PersonwagonUpdateForm object' has no attribute 'max_traction'
-2021-12-22 13:01:21,921 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2021-12-27 12:21:30,135 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+  File "/home/daniel/dke/app/routes.py", line 48, in register
+    if form.validate_on_submit():
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 329, in validate
+    return super().validate(extra)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 146, in validate
+    if not field.validate(self, extra):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 242, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
+    validator(form, self)
+  File "/home/daniel/dke/app/forms.py", line 24, in validate_username
+    user = User.query.filter_by(username=username.data).first()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2810, in first
+    return self.limit(1)._iter().first()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2894, in _iter
+    result = self.session.execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.role
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.role AS user_role 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('feh2', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2021-12-27 13:20:36,431 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 13:20:53,071 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 13:21:02,019 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 13:21:09,853 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 13:21:16,651 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 13:21:28,651 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
