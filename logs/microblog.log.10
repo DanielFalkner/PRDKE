@@ -1,0 +1,98 @@
+2021-12-16 20:13:51,460 ERROR: Exception on /update/1 [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/daniel/dke/app/routes.py", line 95, in update
+    if form.validate_on_submit():
+UnboundLocalError: local variable 'form' referenced before assignment
+2021-12-16 20:15:28,641 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-17 08:19:18,908 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-22 12:21:30,073 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-22 12:22:14,233 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-22 12:56:52,904 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-22 12:57:05,942 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-22 12:57:20,006 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-22 12:58:04,520 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-22 13:00:23,107 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-22 13:00:33,190 ERROR: Exception on /updatePw/1 [GET] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/daniel/dke/app/routes.py", line 143, in update_pw
+    return render_template('updateRw.html', form=form, pw=pw)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
+    return _render(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
+    rv = template.render(context)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "/home/daniel/dke/app/templates/updateRw.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "/home/daniel/dke/app/templates/base.html", line 36, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/daniel/dke/app/templates/updateRw.html", line 15, in block "content"
+    {{ form.max_traction.label }}<br>
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 471, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'app.forms.PersonwagonUpdateForm object' has no attribute 'max_traction'
+2021-12-22 13:00:36,747 ERROR: Exception on /updatePw/1 [GET] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/daniel/dke/app/routes.py", line 143, in update_pw
+    return render_template('updateRw.html', form=form, pw=pw)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
+    return _render(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
+    rv = template.render(context)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "/home/daniel/dke/app/templates/updateRw.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "/home/daniel/dke/app/templates/base.html", line 36, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/daniel/dke/app/templates/updateRw.html", line 15, in block "content"
+    {{ form.max_traction.label }}<br>
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 471, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'app.forms.PersonwagonUpdateForm object' has no attribute 'max_traction'
+2021-12-22 13:01:21,921 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 12:21:30,135 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+    <table>
+        <tr>
+            <th>Railwagon</th>
+            <th>Actions</th>
+        </tr>
+        {% for railwagon in railwagons %}
+        <tr>
+            <td>{{ railwagon.id }}</td>
+            <td>
+                <a href="/deleteRw/{{railwagon.id}}">Delete</a>
+                <br>
+                <a href="/updateRw/{{railwagon.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('railwagon') }}">
+       <button>Add Railwagon</button>
+    </a>
+
+    <table>
+        <tr>
+            <th>Personwagon</th>
+            <th>Actions</th>
+        </tr>
+        {% for personwagon in personwagons %}
+        <tr>
+            <td>{{ personwagon.id }}</td>
+            <td>
+                <a href="/deletePw/{{personwagon.id}}">Delete</a>
+                <br>
+                <a href="/updatePw/{{personwagon.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('personwagon') }}">
+       <button>Add Personwagon</button>
+    </a>
+{% endblock %}

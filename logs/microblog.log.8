@@ -1,0 +1,110 @@
+2021-12-27 12:21:46,870 ERROR: Exception on /index [GET] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: personwagon.train_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/daniel/dke/app/routes.py", line 15, in index
+    personwagons = Personwagon.query.all()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2759, in all
+    return self._iter().all()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2894, in _iter
+    result = self.session.execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: personwagon.train_id
+[SQL: SELECT personwagon.id AS personwagon_id, personwagon.seats AS personwagon_seats, personwagon.max_weight AS personwagon_max_weight, personwagon.width AS personwagon_width, personwagon.train_id AS personwagon_train_id 
+FROM personwagon]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2021-12-27 12:21:49,367 ERROR: Exception on /index [GET] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: personwagon.train_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/daniel/dke/app/routes.py", line 15, in index
+    personwagons = Personwagon.query.all()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2759, in all
+    return self._iter().all()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2894, in _iter
+    result = self.session.execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: personwagon.train_id
+[SQL: SELECT personwagon.id AS personwagon_id, personwagon.seats AS personwagon_seats, personwagon.max_weight AS personwagon_max_weight, personwagon.width AS personwagon_width, personwagon.train_id AS personwagon_train_id 
+FROM personwagon]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2021-12-27 12:23:01,433 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 12:25:38,329 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 12:53:06,952 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2021-12-27 12:53:27,818 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
