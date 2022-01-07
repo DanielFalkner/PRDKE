@@ -4,7 +4,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextA
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from wtforms_sqlalchemy.fields import QuerySelectField
 
-from app.models import User, Railwagon, Personwagon
+from app.models import User, Railwagon, Personwagon, Train
 
 
 class LoginForm(FlaskForm):
@@ -20,7 +20,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-#    role = BooleanField('Admin?')
+    #    role = BooleanField('Admin?')
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -44,9 +44,18 @@ def pw_query():
 
 class TrainForm(FlaskForm):
     id = IntegerField('ID', validators=[DataRequired()])
-    railwagon = QuerySelectField('Railwagon', query_factory=rw_query, allow_blank=True, get_label='id', validators=[DataRequired()])
-    personwagons = QuerySelectField('Personwagons', query_factory=rw_query, allow_blank=True, get_label='id', validators=[DataRequired()])
+    railwagon = QuerySelectField('Railwagon', query_factory=rw_query, allow_blank=True, get_label='id',
+                                 validators=[DataRequired()])
+    personwagons = QuerySelectField('Personwagons', query_factory=pw_query, allow_blank=True, get_label='id',
+                                    validators=[DataRequired()])
     submit = SubmitField('Add Train')
+
+    def validate_id(self, id):
+        train = Train.query.filter_by(id=id.data).first()
+        if train is not None:
+            raise ValidationError('Please use a different ID.')
+        if id.data < 0:
+            raise ValidationError('Please use a number > 0.')
 
 
 class RailwagonForm(FlaskForm):

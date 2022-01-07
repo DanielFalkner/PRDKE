@@ -84,7 +84,9 @@ def user(username):
 def train():
     form = TrainForm()
     if form.validate_on_submit():
-        train = Train(id=form.id.data, railwagon_id=form.railwagon.data)
+        train = Train(id=form.id.data, railwagon=form.railwagon.data)
+        pw = form.personwagons.data
+        pw.train_id_pw = train.id
         db.session.add(train)
         db.session.commit()
         return redirect(url_for('index'))
@@ -112,6 +114,15 @@ def personwagon():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('personwagon.html', title='Personwagon', form=form)
+
+
+@app.route('/deleteTrain/<int:id>')
+def delete_Train(id):
+    train_to_delete = Train.query.get_or_404(id)
+    db.session.delete(train_to_delete)
+    db.session.commit()
+    return redirect(url_for('index'))
+    return render_template('index.html', train_to_delete=train_to_delete)
 
 
 @app.route('/deleteRw/<int:id>')
