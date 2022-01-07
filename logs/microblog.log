@@ -93,3 +93,5 @@ Traceback (most recent call last):
   File "/home/daniel/dke/app/forms.py", line 55, in validate_id
     railwagon = train.railwagon_id
 AttributeError: 'NoneType' object has no attribute 'railwagon_id'
+2022-01-07 08:01:51,357 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-07 09:24:57,792 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
