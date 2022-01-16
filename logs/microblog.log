@@ -95,3 +95,4 @@ Traceback (most recent call last):
 AttributeError: 'NoneType' object has no attribute 'railwagon_id'
 2022-01-07 08:01:51,357 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
 2022-01-07 09:24:57,792 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-16 15:55:47,347 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]

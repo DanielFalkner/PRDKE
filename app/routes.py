@@ -1,9 +1,9 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, jsonify
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, RailwagonForm, RailwagonUpdateForm, PersonwagonForm, \
     PersonwagonUpdateForm, TrainForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Railwagon, Personwagon, Train
+from app.models import User, Railwagon, Personwagon, Train, trains_schema, train_schema
 from werkzeug.urls import url_parse
 
 
@@ -177,3 +177,16 @@ def update_pw(id):
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('updatePw.html', form=form, pw=pw)
+
+
+@app.route('/get-trains', methods=['GET'])
+def api_trains():
+    all_trains = Train.query.all()
+    result = trains_schema.dump(all_trains)
+    return jsonify(result)
+
+
+@app.route("/get-train/<int:id>", methods=["GET"])
+def api_train(id):
+    train = Train.query.get(id)
+    return train_schema.jsonify(train)

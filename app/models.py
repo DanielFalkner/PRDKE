@@ -2,10 +2,19 @@ from datetime import datetime
 
 from sqlalchemy.orm import relationship
 
-from app import db
+from app import db, ma
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import login
+
+
+class TrainSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'railwagon_id')
+
+
+train_schema = TrainSchema()
+trains_schema = TrainSchema(many=True)
 
 
 class User(UserMixin, db.Model):
