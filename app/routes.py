@@ -1,9 +1,9 @@
 from flask import render_template, flash, redirect, url_for, request, jsonify
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, RailwagonForm, RailwagonUpdateForm, PersonwagonForm, \
-    PersonwagonUpdateForm, TrainForm
+    PersonwagonUpdateForm, TrainForm, MaintenanceForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Railwagon, Personwagon, Train, trains_schema, train_schema
+from app.models import User, Railwagon, Personwagon, Train, trains_schema, train_schema, Maintenance
 from werkzeug.urls import url_parse
 
 
@@ -14,7 +14,9 @@ def index():
     railwagons = Railwagon.query.all()
     personwagons = Personwagon.query.all()
     trains = Train.query.all()
-    return render_template('index.html', title='Home', railwagons=railwagons, personwagons=personwagons, trains=trains)
+    maintenances = Maintenance.query.all()
+    return render_template('index.html', title='Home', railwagons=railwagons, personwagons=personwagons, trains=trains,
+                           maintenances=maintenances)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -114,6 +116,27 @@ def personwagon():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('personwagon.html', title='Personwagon', form=form)
+
+
+@app.route('/maintenance', methods=['GET', 'POST'])
+def maintenance():
+    form = MaintenanceForm()
+    if form.validate_on_submit():
+        maintenance = Maintenance(id=form.id.data, user_id=form.user_id.data.id, train_id=form.train_id.data.id,
+                                  time=form.time.data)
+        db.session.add(maintenance)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('maintenance.html', title='Maintenance', form=form)
+
+
+@app.route('/deleteMaintenance/<int:id>')
+def delete_Maintenance(id):
+    maintenance_to_delete = Maintenance.query.get_or_404(id)
+    db.session.delete(maintenance_to_delete)
+    db.session.commit()
+    return redirect(url_for('index'))
+    return render_template('index.html', maintenance_to_delete=maintenance_to_delete)
 
 
 @app.route('/deleteTrain/<int:id>')

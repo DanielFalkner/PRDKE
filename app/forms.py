@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField, SelectField, \
-    FieldList
+    FieldList, DateField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from wtforms_sqlalchemy.fields import QuerySelectField
 
-from app.models import User, Railwagon, Personwagon, Train
+from app.models import User, Railwagon, Personwagon, Train, Maintenance
 
 
 class LoginForm(FlaskForm):
@@ -100,6 +100,31 @@ class PersonwagonUpdateForm(FlaskForm):
     max_weight = IntegerField('Max Weight', validators=[DataRequired()])
     width = SelectField('Width', choices=[(1, 1435), (2, 1520), (3, 1524), (4, 1600)])
     submit = SubmitField('Add Personwagon')
+
+
+def user_query():
+    return User.query
+
+
+def train_query():
+    return Train.query
+
+
+class MaintenanceForm(FlaskForm):
+    id = IntegerField('ID', validators=[DataRequired()])
+    user_id = QuerySelectField('Worker', query_factory=user_query, allow_blank=True, get_label='username',
+                               validators=[DataRequired()])
+    train_id = QuerySelectField('Train', query_factory=train_query, allow_blank=True, get_label='id',
+                                validators=[DataRequired()])
+    time = DateField('Time', validators=[DataRequired()])
+    submit = SubmitField('Add Maintenance')
+
+    def validate_id(self, id):
+        maintenance = Maintenance.query.filter_by(id=id.data).first()
+        if maintenance is not None:
+            raise ValidationError('Please use a different ID.')
+        if id.data < 0:
+            raise ValidationError('Please use a number > 0.')
 
 
 class EditProfileForm(FlaskForm):

@@ -61,4 +61,24 @@
     <a href="{{ url_for('train') }}">
        <button>Add Train</button>
     </a>
+
+    <table>
+        <tr>
+            <th>Maintenance</th>
+            <th>Actions</th>
+        </tr>
+        {% for maintenance in maintenances %}
+        <tr>
+            <td>{{ maintenance.id }}</td>
+            <td>
+                <a href="/deleteMaintenance/{{maintenance.id}}">Delete</a>
+                <br>
+                <a href="/updateMaintenance/{{maintenance.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('maintenance') }}">
+       <button>Add Maintenance</button>
+    </a>
 {% endblock %}
