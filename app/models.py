@@ -10,11 +10,20 @@ from app import login
 
 class TrainSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'railwagon_id')
+        fields = ('id', 'width')
 
 
 train_schema = TrainSchema()
 trains_schema = TrainSchema(many=True)
+
+
+class MaintenanceSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'user_id', 'train_id', 'time')
+
+
+maintenance_schema = MaintenanceSchema()
+maintenances_schema = MaintenanceSchema(many=True)
 
 
 class User(UserMixin, db.Model):
@@ -48,6 +57,7 @@ class Post(db.Model):
 
 class Train(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    width = db.Column(db.Integer, nullable=False)
     railwagon_id = db.Column(db.Integer, db.ForeignKey('railwagon.id'))
     personwagons = db.relationship('Personwagon', backref='train', lazy='dynamic')
     maintenances = db.relationship('Maintenance', backref='train', lazy='dynamic')

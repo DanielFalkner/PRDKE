@@ -1,6 +1,4 @@
-2022-01-05 09:21:39,533 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:02:20,451 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:02:27,955 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+2022-01-05 13:28:33,312 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2028, in get_property
     return self._props[key]
@@ -50,24 +48,9 @@ Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
     raise exception
 sqlalchemy.exc.InvalidRequestError: Mapper 'mapped class Railwagon->railwagon' has no property 'trains'
-2022-01-05 13:04:37,885 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:08:22,987 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:08:51,817 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:09:10,273 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:12:39,570 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:15:42,492 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:16:53,051 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:17:21,988 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:17:49,597 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:20:00,524 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:20:05,166 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2028, in get_property
-    return self._props[key]
-KeyError: 'trains'
-
-The above exception was the direct cause of the following exception:
-
+2022-01-05 13:30:49,927 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 13:30:53,900 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 13:30:56,774 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -103,21 +86,26 @@ Traceback (most recent call last):
     self._generate_backref()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2491, in _generate_backref
     self._add_reverse_property(self.back_populates)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2061, in _add_reverse_property
-    other = self.mapper.get_property(key, _configure_mappers=False)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2030, in get_property
-    util.raise_(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-sqlalchemy.exc.InvalidRequestError: Mapper 'mapped class Railwagon->railwagon' has no property 'trains'
-2022-01-05 13:22:06,332 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:22:22,482 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:22:38,652 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:22:47,982 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:23:38,575 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:24:34,869 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:25:32,255 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:26:28,498 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:26:43,722 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:26:54,892 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:28:29,232 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2063, in _add_reverse_property
+    raise sa_exc.InvalidRequestError(
+sqlalchemy.exc.InvalidRequestError: back_populates on relationship 'Train.railwagon' refers to attribute 'Railwagon.train_id_rw' that is not a relationship.  The back_populates parameter should refer to the name of a relationship on the target class.
+2022-01-05 13:41:29,325 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 13:41:52,377 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 13:45:20,155 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:29:02,371 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:29:39,167 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:29:46,068 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:32:44,772 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:32:49,904 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:33:06,866 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:34:56,453 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:35:19,671 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:36:51,458 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:38:07,835 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:43:09,863 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:45:09,496 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:47:26,441 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:48:00,695 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:48:07,377 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 14:49:09,440 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 15:58:51,476 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]

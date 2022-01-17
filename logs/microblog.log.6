@@ -1,11 +1,4 @@
-2022-01-05 13:28:33,312 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2028, in get_property
-    return self._props[key]
-KeyError: 'trains'
-
-The above exception was the direct cause of the following exception:
-
+2022-01-05 15:58:56,547 ERROR: Exception on /train [GET] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -19,38 +12,25 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 25, in login
-    user = User.query.filter_by(username=form.username.data).first()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_sqlalchemy/__init__.py", line 550, in __get__
-    mapper = orm.class_mapper(type)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 442, in class_mapper
-    mapper = _inspect_mapped_class(class_, configure=configure)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 421, in _inspect_mapped_class
-    mapper._check_configure()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1916, in _check_configure
-    _configure_registries({self.registry}, cascade=True)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3429, in _configure_registries
-    _do_configure_registries(registries, cascade)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3468, in _do_configure_registries
-    mapper._post_configure_properties()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1933, in _post_configure_properties
-    prop.init()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/interfaces.py", line 231, in init
-    self.do_init()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2155, in do_init
-    self._generate_backref()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2491, in _generate_backref
-    self._add_reverse_property(self.back_populates)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2061, in _add_reverse_property
-    other = self.mapper.get_property(key, _configure_mappers=False)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2030, in get_property
-    util.raise_(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-sqlalchemy.exc.InvalidRequestError: Mapper 'mapped class Railwagon->railwagon' has no property 'trains'
-2022-01-05 13:30:49,927 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:30:53,900 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:30:56,774 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+  File "/home/daniel/dke/app/routes.py", line 85, in train
+    form = TrainForm()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 208, in __call__
+    return type.__call__(cls, *args, **kwargs)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_wtf/form.py", line 73, in __init__
+    super().__init__(formdata=formdata, **kwargs)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 280, in __init__
+    super().__init__(self._unbound_fields, meta=meta_obj, prefix=prefix)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 48, in __init__
+    field = meta.bind_field(self, unbound_field, options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/meta.py", line 28, in bind_field
+    return unbound_field.bind(form=form, **options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 395, in bind
+    return self.field_class(*self.args, **kw)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/list.py", line 52, in __init__
+    assert isinstance(
+AssertionError: Field must be unbound, not a field class
+2022-01-05 17:01:31,803 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 17:01:35,216 ERROR: Exception on /train [GET] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -64,48 +44,55 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 25, in login
-    user = User.query.filter_by(username=form.username.data).first()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_sqlalchemy/__init__.py", line 550, in __get__
-    mapper = orm.class_mapper(type)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 442, in class_mapper
-    mapper = _inspect_mapped_class(class_, configure=configure)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 421, in _inspect_mapped_class
-    mapper._check_configure()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1916, in _check_configure
-    _configure_registries({self.registry}, cascade=True)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3429, in _configure_registries
-    _do_configure_registries(registries, cascade)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3468, in _do_configure_registries
-    mapper._post_configure_properties()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1933, in _post_configure_properties
-    prop.init()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/interfaces.py", line 231, in init
-    self.do_init()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2155, in do_init
-    self._generate_backref()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2491, in _generate_backref
-    self._add_reverse_property(self.back_populates)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2063, in _add_reverse_property
-    raise sa_exc.InvalidRequestError(
-sqlalchemy.exc.InvalidRequestError: back_populates on relationship 'Train.railwagon' refers to attribute 'Railwagon.train_id_rw' that is not a relationship.  The back_populates parameter should refer to the name of a relationship on the target class.
-2022-01-05 13:41:29,325 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:41:52,377 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:45:20,155 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:29:02,371 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:29:39,167 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:29:46,068 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:32:44,772 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:32:49,904 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:33:06,866 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:34:56,453 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:35:19,671 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:36:51,458 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:38:07,835 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:43:09,863 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:45:09,496 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:47:26,441 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:48:00,695 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:48:07,377 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 14:49:09,440 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 15:58:51,476 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+  File "/home/daniel/dke/app/routes.py", line 85, in train
+    form = TrainForm()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 208, in __call__
+    return type.__call__(cls, *args, **kwargs)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_wtf/form.py", line 73, in __init__
+    super().__init__(formdata=formdata, **kwargs)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 280, in __init__
+    super().__init__(self._unbound_fields, meta=meta_obj, prefix=prefix)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 48, in __init__
+    field = meta.bind_field(self, unbound_field, options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/meta.py", line 28, in bind_field
+    return unbound_field.bind(form=form, **options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 395, in bind
+    return self.field_class(*self.args, **kw)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/list.py", line 46, in __init__
+    super().__init__(label, validators, default=default, **kwargs)
+TypeError: __init__() got an unexpected keyword argument 'query_factory'
+2022-01-05 17:02:50,196 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-05 17:02:54,448 ERROR: Exception on /train [GET] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/daniel/dke/app/routes.py", line 91, in train
+    return render_template('train.html', title='Train', form=form)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
+    return _render(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
+    rv = template.render(context)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "/home/daniel/dke/app/templates/train.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "/home/daniel/dke/app/templates/base.html", line 37, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/daniel/dke/app/templates/train.html", line 28, in block "content"
+    <p>{{ form.submit() }}</p>
+jinja2.exceptions.UndefinedError: 'app.forms.TrainForm object' has no attribute 'submit'
+2022-01-05 17:03:39,367 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]

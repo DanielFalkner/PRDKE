@@ -61,7 +61,7 @@ class TrainForm(FlaskForm):
 class RailwagonForm(FlaskForm):
     id = IntegerField('ID', validators=[DataRequired()])
     max_traction = IntegerField('Max Traction', validators=[DataRequired()])
-    width = SelectField('Width', choices=[(1, 1435), (2, 1520), (3, 1524), (4, 1600)])
+    width = SelectField('Width', choices=[(1435, 1435), (1520, 1520), (1524, 1524), (1600, 1600)])
     submit = SubmitField('Add Railwagon')
 
     def validate_id(self, id):
@@ -75,7 +75,7 @@ class RailwagonForm(FlaskForm):
 class RailwagonUpdateForm(FlaskForm):
     id = IntegerField('ID', validators=[DataRequired()])
     max_traction = IntegerField('Max Traction', validators=[DataRequired()])
-    width = SelectField('Width', choices=[(1, 1435), (2, 1520), (3, 1524), (4, 1600)])
+    width = SelectField('Width', choices=[(1435, 1435), (1520, 1520), (1524, 1524), (1600, 1600)])
     submit = SubmitField('Add Railwagon')
 
 
@@ -83,7 +83,7 @@ class PersonwagonForm(FlaskForm):
     id = IntegerField('ID', validators=[DataRequired()])
     seats = IntegerField('Seats', validators=[DataRequired()])
     max_weight = IntegerField('Max Weight', validators=[DataRequired()])
-    width = SelectField('Width', choices=[(1, 1435), (2, 1520), (3, 1524), (4, 1600)])
+    width = SelectField('Width', choices=[(1435, 1435), (1520, 1520), (1524, 1524), (1600, 1600)])
     submit = SubmitField('Add Personwagon')
 
     def validate_id(self, id):
@@ -98,7 +98,7 @@ class PersonwagonUpdateForm(FlaskForm):
     id = IntegerField('ID', validators=[DataRequired()])
     seats = IntegerField('Seats', validators=[DataRequired()])
     max_weight = IntegerField('Max Weight', validators=[DataRequired()])
-    width = SelectField('Width', choices=[(1, 1435), (2, 1520), (3, 1524), (4, 1600)])
+    width = SelectField('Width', choices=[(1435, 1435), (1520, 1520), (1524, 1524), (1600, 1600)])
     submit = SubmitField('Add Personwagon')
 
 
@@ -125,6 +125,16 @@ class MaintenanceForm(FlaskForm):
             raise ValidationError('Please use a different ID.')
         if id.data < 0:
             raise ValidationError('Please use a number > 0.')
+
+
+class MaintenanceUpdateForm(FlaskForm):
+    id = IntegerField('ID', validators=[DataRequired()])
+    user_id = QuerySelectField('Worker', query_factory=user_query, allow_blank=True, get_label='username',
+                               validators=[DataRequired()])
+    train_id = QuerySelectField('Train', query_factory=train_query, allow_blank=True, get_label='id',
+                                validators=[DataRequired()])
+    time = DateField('Time', validators=[DataRequired()])
+    submit = SubmitField('Add Maintenance')
 
 
 class EditProfileForm(FlaskForm):

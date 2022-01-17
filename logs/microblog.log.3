@@ -1,58 +1,4 @@
-2022-01-06 14:42:13,316 ERROR: Exception on /train [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 88, in train
-    pw = Personwagon.query.get_or_404(id=form.personwagons.data)
-TypeError: get_or_404() got an unexpected keyword argument 'id'
-2022-01-06 14:43:31,705 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-06 14:43:40,716 ERROR: Exception on /train [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 88, in train
-    pw = Personwagon.query.get_or_404(personwagons=form.personwagons.data)
-TypeError: get_or_404() got an unexpected keyword argument 'personwagons'
-2022-01-06 14:44:03,644 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-06 14:44:13,216 ERROR: Exception on /train [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 88, in train
-    pw = Personwagon.query.get_or_404(train=form.personwagons.data)
-TypeError: get_or_404() got an unexpected keyword argument 'train'
-2022-01-06 14:46:02,926 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-06 14:46:11,909 ERROR: Exception on /train [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+2022-01-06 14:48:13,374 ERROR: Exception on /train [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
     self.dialect.do_execute(
@@ -75,8 +21,8 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 89, in train
-    pw = Personwagon.query.get_or_404(id)
+  File "/home/daniel/dke/app/routes.py", line 88, in train
+    id = Personwagon.query.get_or_404(form.personwagons.data)
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_sqlalchemy/__init__.py", line 460, in get_or_404
     rv = self.get(ident)
   File "<string>", line 2, in get
@@ -114,4 +60,75 @@ FROM personwagon
 WHERE personwagon.id = ?]
 [parameters: (<Personwagon 1>,)]
 (Background on this error at: https://sqlalche.me/e/14/rvf5)
-2022-01-06 14:48:05,555 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-06 14:52:52,603 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-06 15:36:42,318 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-06 15:39:15,770 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-06 15:53:21,341 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-06 15:53:31,673 ERROR: Exception on /train [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/daniel/dke/app/routes.py", line 86, in train
+    if form.validate_on_submit():
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 329, in validate
+    return super().validate(extra)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 146, in validate
+    if not field.validate(self, extra):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 242, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
+    validator(form, self)
+  File "/home/daniel/dke/app/forms.py", line 55, in validate_id
+    railwagon = train.railwagon_id
+AttributeError: 'NoneType' object has no attribute 'railwagon_id'
+2022-01-07 08:01:51,357 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-07 09:24:57,792 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-16 15:55:47,347 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-16 19:05:22,282 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-17 11:14:25,556 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-17 11:25:56,400 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-17 15:34:49,461 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-17 15:34:58,525 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-17 15:35:09,229 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-17 15:37:02,432 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-17 15:37:37,515 ERROR: Exception on /maintenance [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/daniel/dke/app/routes.py", line 125, in maintenance
+    maintenance = Maintenance(id=form.id.data, user=form.user.data, train=form.train.data, time=form.time.data)
+  File "<string>", line 4, in __init__
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/state.py", line 480, in _initialize_instance
+    manager.dispatch.init_failure(self, args, kwargs)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/state.py", line 477, in _initialize_instance
+    return manager.original_init(*mixed[1:], **kwargs)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/decl_base.py", line 1154, in _declarative_constructor
+    raise TypeError(
+TypeError: 'user' is an invalid keyword argument for Maintenance
+2022-01-17 15:40:01,915 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]

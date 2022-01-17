@@ -1,9 +1,10 @@
 from flask import render_template, flash, redirect, url_for, request, jsonify
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, RailwagonForm, RailwagonUpdateForm, PersonwagonForm, \
-    PersonwagonUpdateForm, TrainForm, MaintenanceForm
+    PersonwagonUpdateForm, TrainForm, MaintenanceForm, MaintenanceUpdateForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Railwagon, Personwagon, Train, trains_schema, train_schema, Maintenance
+from app.models import User, Railwagon, Personwagon, Train, trains_schema, train_schema, Maintenance, \
+    maintenances_schema
 from werkzeug.urls import url_parse
 
 
@@ -86,7 +87,7 @@ def user(username):
 def train():
     form = TrainForm()
     if form.validate_on_submit():
-        train = Train(id=form.id.data, railwagon=form.railwagon.data)
+        train = Train(id=form.id.data, width=form.railwagon.data.width, railwagon=form.railwagon.data)
         pw = form.personwagons.data
         pw.train_id_pw = train.id
         db.session.add(train)
@@ -202,6 +203,25 @@ def update_pw(id):
     return render_template('updatePw.html', form=form, pw=pw)
 
 
+@app.route('/updateMaintenance/<int:id>', methods=['GET', 'POST'])
+def update_maintenance(id):
+    maintenance = Maintenance.query.get_or_404(id)
+    form = MaintenanceUpdateForm()
+    if request.method == 'GET':
+        form.id.data = maintenance.id
+        form.user_id.data = maintenance.user_id
+        form.train_id.data = maintenance.train_id
+        form.time.data = maintenance.time
+    if form.validate_on_submit():
+        maintenance.id = form.id.data
+        maintenance.user_id = form.user_id.data.id
+        maintenance.train_id = form.train_id.data.id
+        maintenance.time = form.time.data
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('updateMaintenance.html', form=form, maintenance=maintenance)
+
+
 @app.route('/get-trains', methods=['GET'])
 def api_trains():
     all_trains = Train.query.all()
@@ -213,3 +233,16 @@ def api_trains():
 def api_train(id):
     train = Train.query.get(id)
     return train_schema.jsonify(train)
+
+
+@app.route('/get-maintenances', methods=['GET'])
+def api_maintenances():
+    all_maintenances = Maintenance.query.all()
+    result = maintenances_schema.dump(all_maintenances)
+    return jsonify(result)
+
+
+@app.route("/get-maintenance/<int:id>", methods=["GET"])
+def api_maintenance(id):
+    maintenance = Maintenance.query.get(id)
+    return train_schema.jsonify(maintenance)
