@@ -1,10 +1,10 @@
-2022-01-05 09:21:39,533 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:02:20,451 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:02:27,955 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+2022-01-05 17:04:15,607 ERROR: Exception on /train [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2028, in get_property
-    return self._props[key]
-KeyError: 'trains'
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.InterfaceError: Error binding parameter 1 - probably unsupported type.
 
 The above exception was the direct cause of the following exception:
 
@@ -21,50 +21,61 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 25, in login
-    user = User.query.filter_by(username=form.username.data).first()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_sqlalchemy/__init__.py", line 550, in __get__
-    mapper = orm.class_mapper(type)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 442, in class_mapper
-    mapper = _inspect_mapped_class(class_, configure=configure)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 421, in _inspect_mapped_class
-    mapper._check_configure()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1916, in _check_configure
-    _configure_registries({self.registry}, cascade=True)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3429, in _configure_registries
-    _do_configure_registries(registries, cascade)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3468, in _do_configure_registries
-    mapper._post_configure_properties()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1933, in _post_configure_properties
-    prop.init()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/interfaces.py", line 231, in init
-    self.do_init()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2155, in do_init
-    self._generate_backref()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2491, in _generate_backref
-    self._add_reverse_property(self.back_populates)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2061, in _add_reverse_property
-    other = self.mapper.get_property(key, _configure_mappers=False)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2030, in get_property
+  File "/home/daniel/dke/app/routes.py", line 89, in train
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1428, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 829, in commit
+    self._prepare_impl()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 808, in _prepare_impl
+    self.session.flush()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3345, in flush
+    self._flush(objects)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3485, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3445, in _flush
+    flush_context.execute()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 244, in save_obj
+    _emit_insert_statements(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1096, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
     util.raise_(
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
     raise exception
-sqlalchemy.exc.InvalidRequestError: Mapper 'mapped class Railwagon->railwagon' has no property 'trains'
-2022-01-05 13:04:37,885 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:08:22,987 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:08:51,817 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:09:10,273 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:12:39,570 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:15:42,492 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:16:53,051 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:17:21,988 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:17:49,597 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:20:00,524 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:20:05,166 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.InterfaceError: <unprintable InterfaceError object>
+2022-01-06 13:58:52,387 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-06 14:05:33,264 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-06 14:11:57,716 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-06 14:21:52,048 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+2022-01-06 14:22:06,012 ERROR: Exception on /train [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2028, in get_property
-    return self._props[key]
-KeyError: 'trains'
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.InterfaceError: Error binding parameter 0 - probably unsupported type.
 
 The above exception was the direct cause of the following exception:
 
@@ -81,43 +92,43 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 25, in login
-    user = User.query.filter_by(username=form.username.data).first()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_sqlalchemy/__init__.py", line 550, in __get__
-    mapper = orm.class_mapper(type)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 442, in class_mapper
-    mapper = _inspect_mapped_class(class_, configure=configure)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 421, in _inspect_mapped_class
-    mapper._check_configure()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1916, in _check_configure
-    _configure_registries({self.registry}, cascade=True)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3429, in _configure_registries
-    _do_configure_registries(registries, cascade)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 3468, in _do_configure_registries
-    mapper._post_configure_properties()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 1933, in _post_configure_properties
-    prop.init()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/interfaces.py", line 231, in init
-    self.do_init()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2155, in do_init
-    self._generate_backref()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2491, in _generate_backref
-    self._add_reverse_property(self.back_populates)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/relationships.py", line 2061, in _add_reverse_property
-    other = self.mapper.get_property(key, _configure_mappers=False)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/mapper.py", line 2030, in get_property
+  File "/home/daniel/dke/app/routes.py", line 88, in train
+    pw  = Personwagon.query.get_or_404(form.personwagons.data)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_sqlalchemy/__init__.py", line 460, in get_or_404
+    rv = self.get(ident)
+  File "<string>", line 2, in get
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/deprecations.py", line 401, in warned
+    return fn(*args, **kwargs)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 943, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 947, in _get_impl
+    return self.session._get_impl(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2874, in _get_impl
+    return db_load_fn(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/loading.py", line 530, in load_on_pk_identity
+    session.execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
     util.raise_(
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
     raise exception
-sqlalchemy.exc.InvalidRequestError: Mapper 'mapped class Railwagon->railwagon' has no property 'trains'
-2022-01-05 13:22:06,332 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:22:22,482 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:22:38,652 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:22:47,982 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:23:38,575 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:24:34,869 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:25:32,255 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:26:28,498 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:26:43,722 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:26:54,892 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-05 13:28:29,232 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.InterfaceError: (sqlite3.InterfaceError) Error binding parameter 0 - probably unsupported type.
+[SQL: SELECT personwagon.id AS personwagon_id, personwagon.seats AS personwagon_seats, personwagon.max_weight AS personwagon_max_weight, personwagon.width AS personwagon_width, personwagon.train_id_pw AS personwagon_train_id_pw 
+FROM personwagon 
+WHERE personwagon.id = ?]
+[parameters: (<Personwagon 1>,)]
+(Background on this error at: https://sqlalche.me/e/14/rvf5)
+2022-01-06 14:42:03,156 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]

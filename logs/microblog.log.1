@@ -1,10 +1,10 @@
-2022-01-17 15:49:18,462 ERROR: Exception on /maintenance [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+2022-01-18 13:47:38,670 ERROR: Exception on /register [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
     self.dialect.do_execute(
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
     cursor.execute(statement, parameters)
-sqlite3.InterfaceError: Error binding parameter 1 - probably unsupported type.
+sqlite3.OperationalError: no such column: user.role
 
 The above exception was the direct cause of the following exception:
 
@@ -21,33 +21,26 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 128, in maintenance
-    db.session.commit()
-  File "<string>", line 2, in commit
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1428, in commit
-    self._transaction.commit(_to_root=self.future)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 829, in commit
-    self._prepare_impl()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 808, in _prepare_impl
-    self.session.flush()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3345, in flush
-    self._flush(objects)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3485, in _flush
-    transaction.rollback(_capture_exception=True)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    compat.raise_(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3445, in _flush
-    flush_context.execute()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
-    rec.execute(self)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 244, in save_obj
-    _emit_insert_statements(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1096, in _emit_insert_statements
-    c = connection._execute_20(
+  File "/home/daniel/dke/app/routes.py", line 52, in register
+    if form.validate_on_submit():
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_wtf/form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 329, in validate
+    return super().validate(extra)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/form.py", line 146, in validate
+    if not field.validate(self, extra):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 242, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/wtforms/fields/core.py", line 262, in _run_validation_chain
+    validator(form, self)
+  File "/home/daniel/dke/app/forms.py", line 27, in validate_username
+    user = User.query.filter_by(username=username.data).first()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2810, in first
+    return self.limit(1)._iter().first()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2894, in _iter
+    result = self.session.execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
     return meth(self, args_10style, kwargs_10style, execution_options)
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
@@ -64,15 +57,21 @@ Traceback (most recent call last):
     self.dialect.do_execute(
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
     cursor.execute(statement, parameters)
-sqlalchemy.exc.InterfaceError: <unprintable InterfaceError object>
-2022-01-17 15:58:17,774 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
-2022-01-17 15:58:29,992 ERROR: Exception on /maintenance [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.role
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.role AS user_role 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('Daniel', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2022-01-18 13:59:02,367 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-18 13:59:06,888 ERROR: Exception on /login [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
     self.dialect.do_execute(
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
     cursor.execute(statement, parameters)
-sqlite3.InterfaceError: Error binding parameter 1 - probably unsupported type.
+sqlite3.OperationalError: no such column: user.role
 
 The above exception was the direct cause of the following exception:
 
@@ -89,33 +88,14 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 128, in maintenance
-    db.session.commit()
-  File "<string>", line 2, in commit
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1428, in commit
-    self._transaction.commit(_to_root=self.future)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 829, in commit
-    self._prepare_impl()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 808, in _prepare_impl
-    self.session.flush()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3345, in flush
-    self._flush(objects)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3485, in _flush
-    transaction.rollback(_capture_exception=True)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    compat.raise_(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3445, in _flush
-    flush_context.execute()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
-    rec.execute(self)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 244, in save_obj
-    _emit_insert_statements(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1096, in _emit_insert_statements
-    c = connection._execute_20(
+  File "/home/daniel/dke/app/routes.py", line 29, in login
+    user = User.query.filter_by(username=form.username.data).first()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2810, in first
+    return self.limit(1)._iter().first()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2894, in _iter
+    result = self.session.execute(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
     return meth(self, args_10style, kwargs_10style, execution_options)
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
@@ -132,14 +112,17 @@ Traceback (most recent call last):
     self.dialect.do_execute(
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
     cursor.execute(statement, parameters)
-sqlalchemy.exc.InterfaceError: <unprintable InterfaceError object>
-2022-01-17 16:03:15,416 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
-2022-01-17 16:05:05,358 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
-2022-01-17 16:59:46,921 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
-2022-01-17 17:00:34,422 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
-2022-01-17 17:08:04,852 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
-2022-01-17 17:09:20,668 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
-2022-01-17 17:09:26,430 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
-2022-01-17 17:10:53,425 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
-2022-01-17 17:11:44,813 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
-2022-01-17 17:13:40,490 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.role
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.role AS user_role 
+FROM user 
+WHERE user.username = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('Daniel', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2022-01-18 13:59:39,670 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-18 13:59:43,329 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-18 14:06:39,784 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-18 14:10:50,141 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-18 14:13:18,633 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-18 14:18:27,244 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-18 16:54:46,623 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]

@@ -2,10 +2,18 @@
 
 {% block content %}
     <h1>User: {{ user.username }}</h1>
-    <hr>
-    {% for post in posts %}
-    <p>
-    {{ post.author.username }} says: <b>{{ post.body }}</b>
-    </p>
-    {% endfor %}
+    <table>
+        <tr>
+            <th>Maintenance ID</th>
+            <th>Train</th>
+            <th>Time</th>
+        </tr>
+        {% for maintenance in maintenances %}
+        <tr>
+            <td>{{ maintenance.id }}</td>
+            <td>{{ maintenance.train_id }}</td>
+            <td>{{ maintenance.time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

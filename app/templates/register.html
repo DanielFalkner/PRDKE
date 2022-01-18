@@ -21,7 +21,7 @@
         <p>
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}<br>
-            {% for error in form.password.errors %}
+            {% for error in form.password.errors %}flask db downgrade
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
@@ -29,6 +29,13 @@
             {{ form.password2.label }}<br>
             {{ form.password2(size=32) }}<br>
             {% for error in form.password2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.role.label }}<br>
+            {{ form.role(size=2) }}<br>
+            {% for error in form.role.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>

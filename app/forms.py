@@ -20,7 +20,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    #    role = BooleanField('Admin?')
+    role = SelectField('Role', choices=[('Admin', 'Admin'), ('User', 'User')])
     submit = SubmitField('Register')
 
     def validate_username(self, username):

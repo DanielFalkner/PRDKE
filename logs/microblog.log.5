@@ -1,13 +1,4 @@
-2022-01-05 17:04:15,607 ERROR: Exception on /train [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
-    self.dialect.do_execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.InterfaceError: Error binding parameter 1 - probably unsupported type.
-
-The above exception was the direct cause of the following exception:
-
+2022-01-17 15:40:22,631 ERROR: Exception on /maintenance [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -21,64 +12,22 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 89, in train
-    db.session.commit()
-  File "<string>", line 2, in commit
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1428, in commit
-    self._transaction.commit(_to_root=self.future)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 829, in commit
-    self._prepare_impl()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 808, in _prepare_impl
-    self.session.flush()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3345, in flush
-    self._flush(objects)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3485, in _flush
-    transaction.rollback(_capture_exception=True)
+  File "/home/daniel/dke/app/routes.py", line 125, in maintenance
+    maintenance = Maintenance(id=form.id.data, user=form.user.data, train=form.train.data, time=form.time.data)
+  File "<string>", line 4, in __init__
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/state.py", line 480, in _initialize_instance
+    manager.dispatch.init_failure(self, args, kwargs)
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
     compat.raise_(
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
     raise exception
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3445, in _flush
-    flush_context.execute()
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
-    rec.execute(self)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 244, in save_obj
-    _emit_insert_statements(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1096, in _emit_insert_statements
-    c = connection._execute_20(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
-    ret = self._execute_context(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
-    self._handle_dbapi_exception(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
-    util.raise_(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
-    raise exception
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
-    self.dialect.do_execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.InterfaceError: <unprintable InterfaceError object>
-2022-01-06 13:58:52,387 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-06 14:05:33,264 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-06 14:11:57,716 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-06 14:21:52,048 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
-2022-01-06 14:22:06,012 ERROR: Exception on /train [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
-    self.dialect.do_execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.InterfaceError: Error binding parameter 0 - probably unsupported type.
-
-The above exception was the direct cause of the following exception:
-
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/state.py", line 477, in _initialize_instance
+    return manager.original_init(*mixed[1:], **kwargs)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/decl_base.py", line 1154, in _declarative_constructor
+    raise TypeError(
+TypeError: 'user' is an invalid keyword argument for Maintenance
+2022-01-17 15:45:08,643 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-17 15:45:12,004 ERROR: Exception on /maintenance [GET] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -92,43 +41,72 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/daniel/dke/app/routes.py", line 88, in train
-    pw  = Personwagon.query.get_or_404(form.personwagons.data)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask_sqlalchemy/__init__.py", line 460, in get_or_404
-    rv = self.get(ident)
-  File "<string>", line 2, in get
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/deprecations.py", line 401, in warned
-    return fn(*args, **kwargs)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 943, in get
-    return self._get_impl(ident, loading.load_on_pk_identity)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 947, in _get_impl
-    return self.session._get_impl(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2874, in _get_impl
-    return db_load_fn(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/loading.py", line 530, in load_on_pk_identity
-    session.execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1689, in execute
-    result = conn._execute_20(statement, params or {}, execution_options)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
-    ret = self._execute_context(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
-    self._handle_dbapi_exception(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
-    util.raise_(
+  File "/home/daniel/dke/app/routes.py", line 129, in maintenance
+    return render_template('maintenance.html', title='Maintenance', form=form)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
+    return _render(
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/templating.py", line 120, in _render
+    rv = template.render(context)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "/home/daniel/dke/app/templates/maintenance.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "/home/daniel/dke/app/templates/base.html", line 37, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/daniel/dke/app/templates/maintenance.html", line 15, in block "content"
+    {{ form.user.label }}<br>
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/jinja2/environment.py", line 471, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'app.forms.MaintenanceForm object' has no attribute 'user'
+2022-01-17 15:47:10,743 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-17 15:47:25,957 ERROR: Exception on /maintenance [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/daniel/dke/app/routes.py", line 125, in maintenance
+    maintenance = Maintenance(id=form.id.data, user=form.user.data, train=form.train.data, time=form.time.data)
+AttributeError: 'MaintenanceForm' object has no attribute 'user'
+2022-01-17 15:48:10,597 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]
+2022-01-17 15:48:22,189 ERROR: Exception on /maintenance [POST] [in /home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/daniel/dke/app/routes.py", line 125, in maintenance
+    maintenance = Maintenance(id=form.id.data, user=form.user_id.data, train=form.train_id.data, time=form.time.data)
+  File "<string>", line 4, in __init__
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/state.py", line 480, in _initialize_instance
+    manager.dispatch.init_failure(self, args, kwargs)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
   File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
     raise exception
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
-    self.dialect.do_execute(
-  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 719, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.InterfaceError: (sqlite3.InterfaceError) Error binding parameter 0 - probably unsupported type.
-[SQL: SELECT personwagon.id AS personwagon_id, personwagon.seats AS personwagon_seats, personwagon.max_weight AS personwagon_max_weight, personwagon.width AS personwagon_width, personwagon.train_id_pw AS personwagon_train_id_pw 
-FROM personwagon 
-WHERE personwagon.id = ?]
-[parameters: (<Personwagon 1>,)]
-(Background on this error at: https://sqlalche.me/e/14/rvf5)
-2022-01-06 14:42:03,156 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:44]
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/state.py", line 477, in _initialize_instance
+    return manager.original_init(*mixed[1:], **kwargs)
+  File "/home/daniel/dke/venv/lib/python3.8/site-packages/sqlalchemy/orm/decl_base.py", line 1154, in _declarative_constructor
+    raise TypeError(
+TypeError: 'user' is an invalid keyword argument for Maintenance
+2022-01-17 15:49:08,105 INFO: Microblog startup [in /home/daniel/dke/app/__init__.py:47]

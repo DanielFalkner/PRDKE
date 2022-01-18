@@ -10,17 +10,21 @@
         {% for railwagon in railwagons %}
         <tr>
             <td>{{ railwagon.id }}</td>
+            {% if current_user.role == "Admin" %}
             <td>
                 <a href="/deleteRw/{{railwagon.id}}">Delete</a>
                 <br>
                 <a href="/updateRw/{{railwagon.id}}">Update</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>
+    {% if current_user.role == "Admin" %}
     <a href="{{ url_for('railwagon') }}">
        <button>Add Railwagon</button>
     </a>
+    {% endif %}
 
     <table>
         <tr>
@@ -30,17 +34,21 @@
         {% for personwagon in personwagons %}
         <tr>
             <td>{{ personwagon.id }}</td>
+            {% if current_user.role == "Admin" %}
             <td>
                 <a href="/deletePw/{{personwagon.id}}">Delete</a>
                 <br>
                 <a href="/updatePw/{{personwagon.id}}">Update</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>
+    {% if current_user.role == "Admin" %}
     <a href="{{ url_for('personwagon') }}">
        <button>Add Personwagon</button>
     </a>
+    {% endif %}
 
     <table>
         <tr>
@@ -50,17 +58,21 @@
         {% for train in trains %}
         <tr>
             <td>{{ train.id }}</td>
+            {% if current_user.role == "Admin" %}
             <td>
                 <a href="/deleteTrain/{{train.id}}">Delete</a>
                 <br>
                 <a href="/updateTrain/{{train.id}}">Update</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>
+    {% if current_user.role == "Admin" %}
     <a href="{{ url_for('train') }}">
        <button>Add Train</button>
     </a>
+    {% endif %}
 
     <table>
         <tr>
@@ -70,15 +82,19 @@
         {% for maintenance in maintenances %}
         <tr>
             <td>{{ maintenance.id }}</td>
+            {% if current_user.role == "Admin" %}
             <td>
                 <a href="/deleteMaintenance/{{maintenance.id}}">Delete</a>
                 <br>
                 <a href="/updateMaintenance/{{maintenance.id}}">Update</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>
+    {% if current_user.role == "Admin" %}
     <a href="{{ url_for('maintenance') }}">
        <button>Add Maintenance</button>
     </a>
+    {% endif %}
 {% endblock %}

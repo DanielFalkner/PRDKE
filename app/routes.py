@@ -50,7 +50,7 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data, email=form.email.data, role=form.role.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -63,7 +63,7 @@ def register():
 def newUser():
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data, email=form.email.data, role=form.role.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -76,11 +76,12 @@ def newUser():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template('user.html', user=user, posts=posts)
+    all_maintenances = Maintenance.query.all()
+    maintenances = []
+    for maintenance in all_maintenances:
+        if maintenance.user_id == user.id:
+            maintenances.append(maintenance)
+    return render_template('user.html', user=user, maintenances=maintenances)
 
 
 @app.route('/train', methods=['GET', 'POST'])
