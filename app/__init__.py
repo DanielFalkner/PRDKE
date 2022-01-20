@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_marshmallow import Marshmallow
+from sqlalchemy import event
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
@@ -11,6 +12,7 @@ import os
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
+event.listen(db.engine, 'connect', lambda c, _: c.execute('pragma foreign_keys=on'))
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'

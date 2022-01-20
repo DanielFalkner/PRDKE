@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField, SelectField, \
     FieldList, DateField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
-from wtforms_sqlalchemy.fields import QuerySelectField
+from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 
 from app.models import User, Railwagon, Personwagon, Train, Maintenance
 
@@ -44,10 +44,12 @@ def pw_query():
 
 class TrainForm(FlaskForm):
     id = IntegerField('ID', validators=[DataRequired()])
-    railwagon = QuerySelectField('Railwagon', query_factory=rw_query, allow_blank=True, get_label='id',
+    railwagon = QuerySelectField('Railwagon', query_factory=rw_query, allow_blank=True,
+                                 get_label=lambda s: '%s %s' % (s.id, s.width),
                                  validators=[DataRequired()])
-    personwagons = QuerySelectField('Personwagons', query_factory=pw_query, allow_blank=True, get_label='id',
-                                    validators=[DataRequired()])
+    personwagons = QuerySelectMultipleField('Personwagons', query_factory=pw_query,
+                                            get_label=lambda s: '%s %s' % (s.id, s.width),
+                                            validators=[DataRequired()])
     submit = SubmitField('Add Train')
 
     def validate_id(self, id):

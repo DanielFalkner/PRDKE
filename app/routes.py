@@ -89,8 +89,11 @@ def train():
     form = TrainForm()
     if form.validate_on_submit():
         train = Train(id=form.id.data, width=form.railwagon.data.width, railwagon=form.railwagon.data)
-        pw = form.personwagons.data
-        pw.train_id_pw = train.id
+        for personwagon in form.personwagons.data:
+            personwagon.train_id_pw = train.id
+            if personwagon.width != train.width:
+                flash('Width of Railwagon and Personwagon was not equal')
+                return redirect(url_for('train'))
         db.session.add(train)
         db.session.commit()
         return redirect(url_for('index'))

@@ -33,7 +33,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     role = db.Column(db.String(120), nullable=False)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
-    maintenances = db.relationship('Maintenance', backref='worker', lazy='dynamic')
+    maintenances = db.relationship('Maintenance', cascade='all,delete', backref='worker', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -59,7 +59,7 @@ class Train(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     width = db.Column(db.Integer, nullable=False)
     railwagon_id = db.Column(db.Integer, db.ForeignKey('railwagon.id'))
-    personwagons = db.relationship('Personwagon', backref='train', lazy='dynamic')
+    personwagons = db.relationship('Personwagon', cascade='all,delete', backref='train', lazy='dynamic')
     maintenances = db.relationship('Maintenance', backref='train', lazy='dynamic')
 
     def __repr__(self):
@@ -70,7 +70,7 @@ class Railwagon(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     max_traction = db.Column(db.Integer, nullable=False)
     width = db.Column(db.Integer, nullable=False)
-    train_rw = db.relationship('Train', backref='railwagon', uselist=False)
+    train_rw = db.relationship('Train', cascade='all,delete', backref='railwagon', uselist=False)
 
     def __repr__(self):
         return '<Railwagon {}>'.format(self.id)
