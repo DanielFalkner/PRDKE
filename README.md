@@ -1,5 +1,5 @@
 # PRDKE
-Prerequisite
+## Prerequisite
 ```Python 3.8``` and ```pip``` (usually already bundled with Python) are needed to run this project. Instructions are Linux specific.
 
 Open the terminal and set the root of the project as the working directory or simply open the terminal in the root of the project. 
